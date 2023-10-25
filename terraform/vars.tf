@@ -28,3 +28,5 @@ variable "machine_name" {}
 variable "machine_type" {}
 variable "machine_zone" {}
 variable "machine_image" {}
+
+#cloud_storage
