@@ -30,11 +30,26 @@ resource "google_compute_firewall" "allow_iap" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "22", "443", "8080", "50000"]
+    ports    = ["22"]
   }
 
  source_ranges = ["35.235.240.0/20"]
 
 }
+
+resource "google_compute_firewall" "allow_ports" {
+  project = var.project
+  name    = "allow-ports"
+  network = google_compute_network.main_vpc.id
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "8080" , "433"]
+  }
+ source_ranges = ["0.0.0.0/0"]
+
+}
+
+
 
 

@@ -1,0 +1,30 @@
+pipeline {
+  agent {label 'agent'}
+stages {
+        environment {
+                CLOUDSDK_CORE_PROJECT='devops-task-402821'
+                GCLOUD_CREDS=credentials('gcloud-creds'),
+                KUBE_CONF=credentials('kubeconfig')
+            }
+      
+        stage('auth') {
+                steps {
+                    sh '''
+                    gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
+                    '''
+                }
+                }
+    
+
+        stage('deploy') {
+            steps {
+              
+              sh """
+                kubectl --kubeconfig $KUBE_CONF apply -f myapp-deployment.yaml
+              """
+              }
+              
+    
+            }
+          }
+}

@@ -14,10 +14,24 @@ resource "google_container_cluster" "primary" {
     services_ipv4_cidr_block = var.cluster_services_ip_range
   }
 
+  master_authorized_networks_config  {
+    cidr_blocks {
+      cidr_block   = var.mgmt_subnet_cidr
+      display_name = "Management"
+    }
+  }
+
   private_cluster_config {
     master_ipv4_cidr_block  = var.master_ip_range
     enable_private_nodes    = true
-    enable_private_endpoint = false
+    enable_private_endpoint = true
+
+    ##to make master in private network 
+#   private_cluster_config {  
+#       master_ipv4_cidr_block = "172.16.0.0/28"
+#       enable_private_nodes = true
+#       enable_private_endpoint = true
+#   }
   }
 }
 
