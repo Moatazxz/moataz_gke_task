@@ -42,19 +42,6 @@ spec:
     - port: 80
       targetPort: 80
       protocol: TCP
----      
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#    namespace: dev
-#    name: webapp
-# spec:
-#   defaultBackend:
-#    service:
-#       name: myapp
-#       port:
-#         number: 80
-
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -62,9 +49,6 @@ kind: Ingress
 metadata:
   namespace: dev
   name: mybapp
-  annotations:
-    kubernetes.io/ingress.class: "gce"
-    kubernetes.io/ingress.global-static-ip-name: "webapp"
 spec:
   rules:
   - http:
